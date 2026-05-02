@@ -4,6 +4,7 @@
  * and exponential backoff retry
  */
 
+import * as db from './db';
 import {
   getPendingReports,
   updateReportStatus,
@@ -111,7 +112,7 @@ export async function syncPendingReports(): Promise<{
     return { synced: 0, failed: 0, total: 0 };
   }
 
-  if (!isOnline()) {
+  if (!db.isOnline()) {
     console.log('Offline - skipping sync');
     return { synced: 0, failed: 0, total: 0 };
   }
